@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.sudouser'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    testCompile("io.github.bonigarcia:webdrivermanager:3.7.1")
+    testCompile("io.github.bonigarcia:selenium-jupiter:3.3.2")
+
+}
+
+test {
+    useJUnitPlatform()
+    maxParallelForks = (int) 1
+    forkEvery = 1
+    systemProperties = [
+            'junit.jupiter.execution.parallel.enabled': true,
+            'junit.jupiter.execution.parallel.config.strategy': 'fixed',
+            'junit.jupiter.execution.parallel.config.fixed.parallelism': 1
+    ]
+
+}
